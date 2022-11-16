@@ -1,21 +1,16 @@
 package com.example.blogPro.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Getter
+@Setter
 @Entity
-@ToString(exclude = "comments")
-// do I want to have business logic hear at all or just do it in the service layer ?
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"title"}) )
 public class Post {
     @Id

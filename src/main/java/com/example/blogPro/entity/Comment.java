@@ -1,16 +1,14 @@
 package com.example.blogPro.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
+
 @Table(name = "comment")
 public class Comment {
     @Id

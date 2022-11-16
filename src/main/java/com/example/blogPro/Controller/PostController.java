@@ -27,7 +27,8 @@ public class PostController {
     public ResponseEntity<PostDTO> createPost(@RequestBody PostDTO postDTO){
         return new ResponseEntity<>(postService.createPost(postDTO), HttpStatus.OK);
     }
-    @GetMapping("list")
+    // add listing of all the records without RequestParam
+    @GetMapping("/list")
     public ResponseEntity<PostResponse> getAllPosts(
             @RequestParam(value = "page-number", defaultValue = APPConstants.DEFAULT_PAGE_NUMBER ,required = false) int pageNumber,
             @RequestParam(value = "page-size", defaultValue = APPConstants.DEFAULT_PAGE_SIZE ,required = false) int pageSize,

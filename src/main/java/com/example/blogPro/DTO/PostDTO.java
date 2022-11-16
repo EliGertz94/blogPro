@@ -1,7 +1,8 @@
 package com.example.blogPro.DTO;
 
 import lombok.Data;
-import lombok.ToString;
+
+import java.util.Set;
 
 
 @Data
@@ -11,4 +12,5 @@ public class PostDTO {
     private String title;
     private String description;
     private String content;
+    private Set<CommentDTO> comments;
 }
