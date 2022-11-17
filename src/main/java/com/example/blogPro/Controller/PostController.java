@@ -2,14 +2,13 @@ package com.example.blogPro.Controller;
 
 import com.example.blogPro.DTO.PostDTO;
 import com.example.blogPro.DTO.PostResponse;
-import com.example.blogPro.entity.Post;
 import com.example.blogPro.service.PostService;
 import com.example.blogPro.utils.APPConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/posts")
@@ -24,7 +23,7 @@ public class PostController {
     //create blog post
 
     @PostMapping
-    public ResponseEntity<PostDTO> createPost(@RequestBody PostDTO postDTO){
+    public ResponseEntity<PostDTO> createPost(@Valid @RequestBody PostDTO postDTO){
         return new ResponseEntity<>(postService.createPost(postDTO), HttpStatus.OK);
     }
     // add listing of all the records without RequestParam
@@ -45,7 +44,7 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PostDTO> updatePost(@RequestBody PostDTO postDTO, @PathVariable Long id){
+    public ResponseEntity<PostDTO> updatePost(@Valid @RequestBody PostDTO postDTO, @PathVariable Long id){
        PostDTO updatedPost =  postService.updatePost(postDTO,id);
        return new ResponseEntity<>(updatedPost,HttpStatus.CREATED);
     }
