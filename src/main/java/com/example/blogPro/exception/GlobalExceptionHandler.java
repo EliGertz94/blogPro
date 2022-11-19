@@ -48,7 +48,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         errorDetails.setMessage(exception.getMessage());
         errorDetails.setTimeStamp(new Date());
         errorDetails.setDetails(webRequest.getDescription(false));
-
+        System.out.println("Exception was up");
         return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
