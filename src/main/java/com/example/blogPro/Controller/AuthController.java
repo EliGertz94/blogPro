@@ -1,11 +1,13 @@
 package com.example.blogPro.Controller;
 
+import com.example.blogPro.DTO.JWTAuthResponse;
 import com.example.blogPro.DTO.LoginDTO;
 import com.example.blogPro.DTO.SignUpDTO;
 import com.example.blogPro.entity.Role;
 import com.example.blogPro.entity.User;
 import com.example.blogPro.repository.RoleRepository;
 import com.example.blogPro.repository.UserRepository;
+import com.example.blogPro.security.JWTTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,18 +36,20 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private JWTTokenProvider tokenProvider;
+
 
     // check if login is correct
 
     @PostMapping("/signin")
-    public ResponseEntity<String> authenticationUser(@RequestBody LoginDTO loginDTO){
+    public ResponseEntity<JWTAuthResponse> authenticationUser(@RequestBody LoginDTO loginDTO){
        Authentication authentication =  authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDTO.getUsernameOrEmail(),loginDTO.getPassword()));
-
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return new ResponseEntity<>("user signed in successfully", HttpStatus.OK);
+        String token = tokenProvider.generateToken(authentication);
+        return  ResponseEntity.ok(new JWTAuthResponse(token));
     }
 
     @PostMapping("/signup")
